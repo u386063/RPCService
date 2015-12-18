@@ -1,5 +1,8 @@
 package com.rpc.server.binarysearchtree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * Binary search tree operations pertaining to the whole tree are performed through 
  * the members of this class.
@@ -7,6 +10,7 @@ package com.rpc.server.binarysearchtree;
 public class BinarySearchTree {
 
 	private BinarySearchTreeNode binarySearchTreeNode = null;
+	List<Integer> parameterList = null;
 	
 	/*
 	 * Insert new value into the tree.
@@ -112,6 +116,22 @@ public class BinarySearchTree {
 	}
 	
 	/*
+	 * Search binary search tree with multiple parameters
+	 */
+	public String searchNode(ArrayList searchList){
+		StringBuffer stringBuffer = new StringBuffer();
+		for(int i=0;i<searchList.size();i++){
+			stringBuffer.append(" ");
+			Boolean isFound =  searchNode(binarySearchTreeNode, Integer.parseInt(searchList.get(i).toString()));
+			System.out.println("search return value =" + isFound);
+			stringBuffer.append(searchList.get(i)).append(":").append(isFound?"Found":"Not Found");
+			stringBuffer.append(" ");
+		}
+		return stringBuffer.toString();
+	}
+	
+	
+	/*
 	 * Search the tree for a particular node.
 	 */
 	public String searchNode(String data){
@@ -120,6 +140,8 @@ public class BinarySearchTree {
 		System.out.println("search return value =" + isFound);
 		return isFound.toString();
 	}
+
+
 	
 	/*
 	 * Traverse the tree in binary search mode. 
@@ -214,6 +236,46 @@ public class BinarySearchTree {
 			else
 				return findMin(node.getLeftNode());
 		}
-	}	 
+	}
+	
+	/*private boolean deleteNodeBST(BinarySearchTreeNode node, Integer value) {
+        if (node == null) {
+            return false;
+        }
+        if (node.getData() == value) {
+
+            if ((node.getLeftNode() == null) && (node.getRightNode() == null)) {
+                // leaf node
+                node = null;
+                return true;
+            }
+
+            if ((node.getLeftNode() != null) && (node.getRightNode() != null)) {
+                // node with two children
+                node.setData(findMin(node.getRightNode()).getData());
+                return true;
+            }
+
+            // either left child or right child
+            if (node.getLeftNode() != null) {
+                parent.setLeft(node.getLeftNode());
+                node = null;
+                return true;
+            }
+
+            if (node.getRightNode() != null) {
+                parent.setRight(node.getRightNode());
+                node = null;
+                return true;
+            }
+        }
+        parent = node;
+        if (node.getData() > value) {
+            return deleteNodeBST(node.getLeftNode(), value);
+        } else {
+            return deleteNodeBST(node.getRightNode(), value);
+        }
+    }
+	*/
 
 }

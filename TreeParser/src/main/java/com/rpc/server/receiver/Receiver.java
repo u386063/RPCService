@@ -2,6 +2,7 @@ package com.rpc.server.receiver;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -163,7 +164,18 @@ public class Receiver extends RPCConnection {
 				if (requestMethodName.equalsIgnoreCase(Constants.SHOW_TREE_OPERATIONS)) {
 					 Set<String> operationsSet = TreeOperations.getOperations();
 					 response.sendResponseObject(operationsSet, requestData);
-				} else {
+				} 
+				//Added new condition to search the tree with 1 or more parameters - Start
+				else if(requestMethodName.equalsIgnoreCase(Constants.SEARCH_NODE)){
+					Object object = TreeObjects.getInstance().getObject(requestMethodName);
+					if(object != null) {
+					Method method = object.getClass().getMethod(requestMethodName, new Class[]{ArrayList.class});
+					Object result = method.invoke(object, requestData.getParameterList());
+					response.sendResponseObject((String) result, requestData);
+					}
+				}
+				//Added new condition to search the tree with 1 or more parameters - End
+				else {
 					Object object = TreeObjects.getInstance().getObject(requestMethodName);
 					if (object != null) {
 						Object result = null;

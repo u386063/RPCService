@@ -10,4 +10,5 @@ public class Constants {
 	public static final String RPC_QUEUE = "activemq.queueName";
 	public static final String RPC_TOPIC = "activemq.topicName";
 	public static final String SHOW_TREE_OPERATIONS = "showOperations";
+	public static final String SEARCH_NODE = "searchNode";
 }

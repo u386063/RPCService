@@ -70,7 +70,15 @@ public class Client implements CallBack {
 		// Sending request to server to calculate the addition of all the nodes
 		obj.sendRequest(Constants.ADD);
 		// Sending request to server to search the node of binary search tree
-		obj.sendRequest(Constants.SEARCH_NODE, "77");
+		obj.sendRequest(Constants.SEARCH_NODE, "13");
+		
+		//Sending request to server to search the node with multiple parameters
+		obj.sendRequest(Constants.SEARCH_NODE, "13","1");
+		
+		//Sending request to server to search the node with multiple parameters
+		obj.sendRequest(Constants.SEARCH_NODE, "13","1","90","8");
+		
+		
 		// Close the sender connection opened at the time of class
 		// initialization
 		obj.getSender().closeConnection();
@@ -107,7 +115,52 @@ public class Client implements CallBack {
 		parameterList.add(parameter);
 		sendRequest(requestMethodName, parameterList, 1);
 	}
-
+	
+	/**
+	 * This method is a overloaded method to send the request.
+	 * 
+	 * @param requestMethodName
+	 *            This parameter is holds the tree operation requested from the
+	 *            client
+	 * @param parameter1
+	 *            This parameter1 holds the search node
+	 * @param parameter2
+	 *            This parameter1 holds the search node 
+	 *            
+	 */
+	public void sendRequest(String requestMethodName, String parameter1,String parameter2) {
+		parameterList = new ArrayList<Object>();
+		parameterList.add(parameter1);
+		parameterList.add(parameter2);
+		sendRequest(requestMethodName, parameterList, 2);
+	}
+	
+	/**
+	 * This method is a overloaded method to send the request.
+	 * 
+	 * @param requestMethodName
+	 *            This parameter is holds the tree operation requested from the
+	 *            client
+	 * @param parameter1
+	 *            This parameter1 holds the search node
+	 * @param parameter2
+	 *            This parameter1 holds the search node 
+	 * @param parameter3
+	 *            This parameter1 holds the search node 
+	 * @param parameter4
+	 *            This parameter1 holds the search node 
+	 *            
+	 */
+	public void sendRequest(String requestMethodName, String parameter1,String parameter2,String parameter3, String parameter4) {
+		parameterList = new ArrayList<Object>();
+		parameterList.add(parameter1);
+		parameterList.add(parameter2);
+		parameterList.add(parameter3);
+		parameterList.add(parameter4);
+		sendRequest(requestMethodName, parameterList, 4);
+	}
+	
+	
 	
 	/**
 	 * This method is a overloaded method to send the request.
